@@ -18,4 +18,9 @@ class UserModel extends Model
      * Define Primary key from m_user table
      */
     protected $primaryKey = 'user_id';
+
+    /**
+     * Attribute that are mass assignable
+     */
+    protected $fillable = ['level_id', 'username', 'nama'];
 }

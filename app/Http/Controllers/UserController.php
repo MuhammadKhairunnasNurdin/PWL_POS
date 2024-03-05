@@ -27,13 +27,25 @@ class UserController extends Controller
         /**
          * Update data using Eloquent Model
          */
-        $data = [
+        /*$data = [
             'nama' => 'Pelanggan pertama',
-        ];
+        ];*/
         /**
          * Updated our data with update() function
          */
-        UserModel::where('username', 'customer-1')->update($data);
+        /*UserModel::where('username', 'customer-1')->update($data);*/
+
+        /**
+         * Example mass assignment using Eloquent ORM (with attribute
+         * $fillable)
+         */
+        $data = [
+            'level_id' => 2,
+            'username' => 'manager_tiga',
+            'nama' => 'Manager 3',
+            'password' => Hash::make('12345')
+        ];
+        UserModel::create($data);
 
         /**
          * Try access UserModel
