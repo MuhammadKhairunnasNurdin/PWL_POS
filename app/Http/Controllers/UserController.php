@@ -91,9 +91,56 @@ class UserController extends Controller
         /**
          * Retrieve the "count" result of the query.
          */
-        $user = UserModel::where('level_id', 2)->count();
-        return view('user', ['data' => ['jumlahPengguna' => $user]]);
+        /*$user = UserModel::where('level_id', 2)->count();
+        return view('user', ['data' => ['jumlahPengguna' => $user]]);*/
 
-//        return view('user', ['data' => $user]);
+        /**
+         * firstOrCreate() method with existing data available
+         */
+        /*$user = UserModel::firstOrCreate(
+            [
+                'username' => 'manager',
+                'nama' => 'Manager'
+            ]
+        );*/
+
+        /**
+         * firstOrCreate() method with data isn't available
+         */
+        /*$user = UserModel::firstOrCreate(
+            [
+                'username' => 'manager22',
+                'nama' => 'Manager Dua Dua',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ]
+        );*/
+
+        /**
+         * firstOrNew() method with existing data available
+         */
+        /*$user = UserModel::firstOrNew(
+            [
+                'username' => 'manager',
+                'nama' => 'Manager'
+            ]
+        );*/
+
+        /**
+         * firstOrNew() method with data isn't available
+         *
+         * with object saved in database using $object->save()
+         */
+        $user = UserModel::firstOrNew(
+            [
+                'username' => 'manager33',
+                'nama' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ]
+        );
+        $user->save();
+
+        return view('user', ['data' => $user]);
     }
 }
