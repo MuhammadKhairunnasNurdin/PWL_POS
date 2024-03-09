@@ -73,9 +73,20 @@ class UserController extends Controller
          * find() method above, findOr() can handle if finding failed with
          * error message like bellow or other way
          */
-        $user = UserModel::findOr(20, ['username', 'nama'], function () {
+        /*$user = UserModel::findOr(20, ['username', 'nama'], function () {
         abort(404);
-        });
+        });*/
+
+        /**
+         * method finding data with handled exception when row not found
+         */
+        /*$user = UserModel::findOrFail(1);*/
+
+        /**
+         * Execute the query and get the first result or throw an
+         * exception.
+         */
+        $user = UserModel::where('username', 'manager9')->firstOrFail();
 
         return view('user', ['data' => $user]);
     }
