@@ -86,8 +86,14 @@ class UserController extends Controller
          * Execute the query and get the first result or throw an
          * exception.
          */
-        $user = UserModel::where('username', 'manager9')->firstOrFail();
+        /*$user = UserModel::where('username', 'manager9')->firstOrFail();*/
 
-        return view('user', ['data' => $user]);
+        /**
+         * Retrieve the "count" result of the query.
+         */
+        $user = UserModel::where('level_id', 2)->count();
+        return view('user', ['data' => ['jumlahPengguna' => $user]]);
+
+//        return view('user', ['data' => $user]);
     }
 }
