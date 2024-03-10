@@ -189,7 +189,13 @@ class UserController extends Controller
         /**
          * show all user data
          */
-        $user = UserModel::all();
+        /*$user = UserModel::all();
+        return view('user', ['data' => $user]);*/
+
+        /**
+         * show join table from model UserModel and LevelModel
+         */
+        $user = UserModel::with('level')->get();
         return view('user', ['data' => $user]);
     }
 
