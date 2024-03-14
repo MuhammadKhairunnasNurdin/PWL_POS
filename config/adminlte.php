@@ -145,9 +145,9 @@ return [
     | Layout
     |--------------------------------------------------------------------------
     |
-    | Here we change the layout of your admin panel.
+    | Here we change the layouts of your admin panel.
     |
-    | For detailed instructions you can look the layout section here:
+    | For detailed instructions you can look the layouts section here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */

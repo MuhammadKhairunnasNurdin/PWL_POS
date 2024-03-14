@@ -1,6 +1,6 @@
-@extends('layout.app')
+@extends('layouts.app')
 
-{{--Customize layout section--}}
+{{--Customize layouts section--}}
 
 @section('subtitle', 'Welcome')
 @section('content_header', 'Home')
