@@ -74,4 +74,15 @@ class KategoriController extends Controller
         $kategori->save();
         return redirect('/kategori');
     }
+
+    /**
+     * Deleted specific kategori data
+     */
+    public function delete($id)
+    {
+        $kategori = KategoriModel::find($id);
+        $kategori->delete();
+
+        return redirect('/kategori');
+    }
 }
