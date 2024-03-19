@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperKategoriModel
+ */
 class KategoriModel extends Model
 {
     protected $table = 'm_kategori';
