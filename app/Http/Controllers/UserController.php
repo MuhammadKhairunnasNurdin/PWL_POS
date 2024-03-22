@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,7 @@ class UserController extends Controller
     /**
      * handling view home page user
      */
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
         /**
          * Insert data using Eloquent Model
@@ -195,8 +196,13 @@ class UserController extends Controller
         /**
          * show join table from model UserModel and LevelModel
          */
-        $user = UserModel::with('level')->get();
-        return view('user', ['data' => $user]);
+        /*$user = UserModel::with('level')->get();
+        return view('user', ['data' => $user]);*/
+
+        /**
+         * Show all m_user table data using dataTables
+         */
+        return $dataTable->render('user.index');
     }
 
     /**
@@ -254,5 +260,10 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('/user');
+    }
+
+    public function create()
+    {
+        return view('user.create');
     }
 }
