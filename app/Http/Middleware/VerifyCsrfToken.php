@@ -12,6 +12,11 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        '/kategori'
+        /**
+         * Create Exception for Csrf Protection, because those 3 url aren't using Csrf validation
+         */
+        '/kategori',
+        '/user',
+        '/level'
     ];
 }

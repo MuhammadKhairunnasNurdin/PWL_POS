@@ -24,14 +24,20 @@
                 </div>
                 <div class="form-group">
                     <label for="namaKategori">Nama Kategori</label>
-                    <input type="text" class="form-control" id="namaKategori" name="kategori_nama" placeholder="">
+                    <input type="text" class="form-control @error('kategori_nama') is-invalid @enderror" id="namaKategori" name="kategori_nama" placeholder="">
+
+                    @error('kategori_nama')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 </div>
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-            @if($errors->any())
+
+            {{--show all error below form row--}}
+            {{--@if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach($errors->all() as $error)
@@ -39,7 +45,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif--}}
         </form>
 
     </div>

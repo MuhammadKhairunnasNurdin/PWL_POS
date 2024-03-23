@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\LevelDataTable;
+use App\Http\Requests\LevelRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class LevelController extends Controller
 {
@@ -41,8 +44,33 @@ class LevelController extends Controller
         return $dataTable->render('level.index');
     }
 
-    public function create()
+    /**
+     * Show page level form
+     */
+    public function create(): View
     {
         return view('level.create');
+    }
+
+    /**
+     * validate Level form and store that in database
+     */
+    public function store(LevelRequest $request): RedirectResponse
+    {
+        /**
+         * The incoming request is valid...
+         */
+
+        /**
+         * Retrieve the validated input data...
+         */
+        $validated = $request->validated();
+
+        /**
+         * Retrieve a portion of the validated input data...
+         */
+        $validated = $request->safe()->only(['level_kode', 'level_nama']);
+
+        return redirect('/level');
     }
 }

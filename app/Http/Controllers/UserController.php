@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
+use App\Http\Requests\UserRequest;
 use App\Models\UserModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -206,6 +209,36 @@ class UserController extends Controller
     }
 
     /**
+     * Show page user form
+     */
+    public function create(): View
+    {
+        return view('user.create');
+    }
+
+    /**
+     * validate user form and store that in database
+     */
+    public function store(UserRequest $request): RedirectResponse
+    {
+        /**
+         * The incoming request is valid...
+         */
+
+        /**
+         * Retrieve the validated input data...
+         */
+        $validated = $request->validated();
+
+        /**
+         * Retrieve a portion of the validated input data...
+         */
+        $validated = $request->safe()->only(['level_id', 'username', 'name', 'password']);
+
+        return redirect('/user');
+    }
+
+    /**
      * handling view when adding user data
      */
     public function tambah()
@@ -260,10 +293,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('/user');
-    }
-
-    public function create()
-    {
-        return view('user.create');
     }
 }
