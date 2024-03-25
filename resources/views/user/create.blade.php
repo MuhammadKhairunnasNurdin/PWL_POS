@@ -3,7 +3,7 @@
 {{-- Customize layout sections  --}}
 @section('subtitle', 'User')
 @section('content_header_title', 'User')
-@section('content_header_subtitle', 'Create ')
+@section('content_header_subtitle', 'Create')
 
 {{-- Content body:main page content  --}}
 @section('content')
@@ -51,7 +51,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                     </div>
-                    <select name="level_kode" class="form-control @error('level_kode') is-invalid @enderror">
+                    <select name="level_id" class="form-control @error('level_kode') is-invalid @enderror">
                         <option value="1">level 1</option>
                         <option value="2">level 2</option>
                         <option value="3">level 3</option>
@@ -63,10 +63,11 @@
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <!-- /input-group -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
-        <!-- /.card-body -->
     </div>
 @endsection
