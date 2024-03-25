@@ -13,7 +13,7 @@
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $kategori_id
  * @property string $kategori_kode
@@ -36,7 +36,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
+ *
+ * @property int $level_id
+ * @property string $level_kode
+ * @property string $level_nama
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserModel> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereLevelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereLevelKode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereLevelNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperLevelModel {}
+}
+
+namespace App\Models{
+/**
+ *
  *
  * @property int $user_id
  * @property int $level_id
@@ -64,26 +89,28 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
  *
+ *
+ * @property int $user_id
  * @property int $level_id
- * @property string $level_kode
- * @property string $level_nama
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserModel> $users
- * @property-read int|null $users_count
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel query()
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereLevelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereLevelKode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereLevelNama($value)
- * @method static \Illuminate\Database\Eloquent\Builder|LevelModel whereUpdatedAt($value)
+ * @property string $username
+ * @property string $nama
+ * @property string $password
+ * @property string|null $created_at
+ * @property string|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user query()
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user whereLevelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user whereNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|m_user whereUsername($value)
  * @mixin \Eloquent
  */
 	#[\AllowDynamicProperties]
-	class IdeHelperLevelModel {}
+	class IdeHelperm_user {}
 }
 
