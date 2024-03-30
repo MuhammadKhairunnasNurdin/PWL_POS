@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\Facades\DataTables;
+use App\Models\LevelModel;
 use App\DataTables\UserDataTable;
 use App\Http\Requests\UserRequest;
 use App\Models\UserModel;
@@ -15,7 +19,7 @@ class UserController extends Controller
     /**
      * handling view home page user
      */
-    public function index(UserDataTable $dataTable)
+    public function index(): View
     {
         /**
          * Insert data using Eloquent Model
@@ -204,8 +208,26 @@ class UserController extends Controller
 
         /**
          * Show all m_user table data using dataTables
+         *
+         * This for active menu we set in datatables
          */
-        return $dataTable->render('user.index');
+        /*return $dataTable->render('user.index');*/
+
+        $breadcrumb = (object) [
+            'title' => 'Daftar User',
+            'list' => ['Home', 'User']
+        ];
+
+        $page = (object) [
+            'title' => 'Daftar User yang terdaftar dalam sistem'
+        ];
+
+        /**
+         * Set active menu
+         */
+        $activeMenu = 'user';
+
+        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
     /**
@@ -213,50 +235,231 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('user.create');
+        $breadcrumb = (object) [
+            'title' => 'Tambah User',
+            'list' => ['Home', 'User', 'Tambah']
+        ];
+
+        $page = (object) [
+            'title' => 'Tambah User baru'
+        ];
+
+        /**
+         * Retrieve all level data
+         */
+        $level = LevelModel::all();
+
+        /**
+         * Set active menu
+         */
+        $activeMenu = 'user';
+
+        return view('user.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     /**
      * validate user form and store that in database
      */
-    public function store(UserRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        /**
-         * The incoming request is valid...
-         */
+        $request->validate([
+            /**
+             * Username must fill with string, minimum 3 character, and
+             * unique in existing m_user username data
+             */
+            'username' => 'required|string|min:3|unique:m_user,username',
 
-        /**
-         * Retrieve the validated input data...
-         */
-        $validated = $request->validated();
+            /**
+             * Must be fill with string, with maximum 100 character
+             */
+            'nama' => 'required|string|max:100',
 
-        /**
-         * Retrieve a portion of the validated input data...
-         */
-        $validated = $request->safe()->only(['username', 'nama', 'password','level_id']);
+            /**
+             * password must have minimum 5 character
+             */
+            'password' => 'required|min:5',
 
-        UserModel::create([
-            'username' => $validated['username'],
-            'nama' => $validated['nama'],
-            'password' => $validated['password'],
-            'level_id' => $validated['level_id'],
+            /**
+             * level must fill with number
+             */
+            'level_id' => 'required|integer',
         ]);
 
-        return redirect('/user');
+        UserModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+
+            /**
+             * password is encrypted before save in database
+             */
+            'password' => bcrypt($request->password),
+            'level_id' => $request->level_id,
+        ]);
+
+        return redirect('/user')->with('success', 'Data user berhasil disimpan');
+    }
+
+    /**
+     * take user data in JSON format for datatables
+     * @throws \Exception
+     */
+    public function list(Request $request): JsonResponse
+    {
+        $users = UserModel::select(['user_id', 'username', 'nama', 'level_id'])
+                    ->with('level');
+
+        return DataTables::of($users)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($user) {
+                $btn  = '<a href="'.url('/user/' . $user->user_id).'" class="btn btn-info btn-sm">Detail</a> ';
+                $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
+                $btn .= '<form class="d-inline-block" method="POST" action="'. url('/user/'.$user->user_id).'">'
+
+                             . csrf_field()
+                             . method_field('DELETE') .
+                            '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakit menghapus data ini?\');">Hapus</button>
+                        </form>';
+                return $btn;
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
+
+    /**
+     * show detail data from table that using list() function to show all data
+     */
+    public function show(string $id): View
+    {
+        $user = UserModel::with('level')->find($id);
+
+        $breadcrumb = (object)[
+            'title' => 'Detail User',
+            'list' => ['Home', 'User', 'Detail']
+        ];
+
+        $page = (object)[
+            'title' => 'Detail user'
+        ];
+
+        /**
+         * Set active menu
+         */
+        $activeMenu = 'user';
+
+        return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user,'activeMenu' => $activeMenu]);
+    }
+
+    /**
+     * show form edit user
+     */
+    public function edit($id):View
+    {
+        /**
+         * Retrieve specific user data with id
+         */
+        $user = UserModel::find($id);
+
+        /**
+         * Retrieve all level data
+         */
+        $level = LevelModel::all();
+
+        $breadcrumb = (object)[
+            'title' => 'Edit User',
+            'list' => ['Home', 'User', 'Edit']
+        ];
+
+        $page = (object)[
+            'title' => 'Edit User'
+        ];
+
+        /**
+         * Set active menu
+         */
+        $activeMenu = 'user';
+
+        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $level, 'activeMenu' => $activeMenu]);
+    }
+
+    /**
+     * saving edited form data in database
+     */
+    public function update(Request $request, string $id): RedirectResponse
+    {
+        $request->validate([
+            /**
+             * Username must fill with string, minimum 3 character, and
+             * unique in existing m_user username data, except for user that with id we edit
+             */
+            'username' => 'required|string|min:3|unique:m_user,username, '.$id. ',user_id',
+
+            /**
+             * Must be fill with string, with maximum 100 character
+             */
+            'nama' => 'required|string|max:100',
+
+            /**
+             * password must have minimum 5 character
+             */
+            'password' => 'required|min:5',
+
+            /**
+             * level must fill with number
+             */
+            'level_id' => 'required|integer',
+        ]);
+
+        UserModel::find($id)->update([
+            'username' => $request->username,
+            'nama' => $request->nama,
+
+            /**
+             * password is encrypted before save in database
+             */
+            'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
+            'level_id' => $request->level_id,
+        ]);
+
+        return redirect('/user')->with('success', 'Data user berhasil diubah');
+    }
+
+    /**
+     * delete specific user data with id
+     */
+    public function destroy(string $id): RedirectResponse
+    {
+        $check = UserModel::find($id);
+
+        /**
+         * check whatever user data with id is available or not
+         */
+        if (!$check) {
+            return redirect('/user')->with('error', 'Data User tidak ditemukan');
+        }
+
+        try {
+            /**
+             * Delete user data
+             */
+            UserModel::destroy($id);
+            return redirect('/user')->with('success', 'Data User berhasil dihapus');
+        } catch (QueryException) {
+            return redirect('/user')->with('error', 'Data User gagal dihapus, karena masih terdapat tabel lain yang terkait dengan data ini');
+        }
     }
 
     /**
      * handling view when adding user data
      */
-    public function tambah()
+   /* public function tambah()
     {
         return view('user_tambah');
-    }
+    }*/
 
     /**
      * handling form when adding user data
      */
-    public function tambah_simpan(Request $request)
+    /*public function tambah_simpan(Request $request)
     {
         UserModel::create([
             'username' => $request->username,
@@ -265,21 +468,21 @@ class UserController extends Controller
             'level_id' => $request->level_id,
         ]);
         return redirect('/user');
-    }
+    }*/
 
     /**
      * handling view when update user data
      */
-    public function ubah($id)
+    /*public function ubah($id)
     {
         $user = UserModel::find($id);
         return view('user_ubah', ['data' => $user]);
-    }
+    }*/
 
     /**
      * handling form when update user data
      */
-    public function ubah_simpan($id, Request $request)
+    /*public function ubah_simpan($id, Request $request)
     {
         $user = UserModel::find($id);
 
@@ -289,16 +492,16 @@ class UserController extends Controller
 
         $user->save();
         return redirect('/user');
-    }
+    }*/
 
     /**
      * handling delete user data
      */
-    public function hapus($id)
+    /*public function hapus($id)
     {
         $user = UserModel::find($id);
         $user->delete();
 
         return redirect('/user');
-    }
+    }*/
 }

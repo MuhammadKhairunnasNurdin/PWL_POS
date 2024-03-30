@@ -15,8 +15,8 @@ class VerifyCsrfToken extends Middleware
         /**
          * Create Exception for Csrf Protection, because those 3 url aren't using Csrf validation
          */
-        '/kategori',
+        /*'/kategori',
         '/user',
-        '/level'
+        '/level'*/
     ];
 }
