@@ -227,7 +227,12 @@ class UserController extends Controller
          */
         $activeMenu = 'user';
 
-        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        /**
+         * Retrieve all level data for filter in User table
+         */
+        $level = LevelModel::all();
+
+        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level,'activeMenu' => $activeMenu]);
     }
 
     /**
@@ -307,6 +312,13 @@ class UserController extends Controller
     {
         $users = UserModel::select(['user_id', 'username', 'nama', 'level_id'])
                     ->with('level');
+
+        /**
+         * Filter User data that we retrieve above base level_id retrieved in user.index view
+         */
+        if ($request->level_id) {
+            $users->where('level_id', $request->level_id);
+        }
 
         return DataTables::of($users)
             ->addIndexColumn()
