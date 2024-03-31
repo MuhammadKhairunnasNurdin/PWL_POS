@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LevelResourceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
@@ -105,3 +106,9 @@ Route::group(['prefix' => 'user'], function () {
      */
     Route::delete('/{id}', [UserController::class, 'destroy']);
 });
+
+/**
+ * Route for Resource in Level table: create, store, show, edit, update, and destroy, also with list that return JsonResponse
+ */
+Route::resource('level', LevelResourceController::class);
+Route::post('level/list', [LevelResourceController::class, 'list']);
