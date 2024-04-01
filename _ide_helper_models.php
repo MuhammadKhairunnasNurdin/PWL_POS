@@ -24,6 +24,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\KategoriModel $kategori
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\StokModel> $stok
+ * @property-read int|null $stok_count
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel query()
@@ -50,6 +52,8 @@ namespace App\Models{
  * @property string $kategori_nama
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BarangModel> $barang
+ * @property-read int|null $barang_count
  * @method static \Illuminate\Database\Eloquent\Builder|KategoriModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|KategoriModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|KategoriModel query()
@@ -89,6 +93,35 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperLevelModel {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $stok_id
+ * @property int $barang_id
+ * @property int $user_id
+ * @property string $stok_tanggal
+ * @property int $stok_jumlah
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\BarangModel $barang
+ * @property-read \App\Models\UserModel $user
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereBarangId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereStokId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereStokJumlah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereStokTanggal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StokModel whereUserId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperStokModel {}
 }
 
 namespace App\Models{
@@ -137,6 +170,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\LevelModel $level
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\StokModel> $stok
+ * @property-read int|null $stok_count
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel query()
