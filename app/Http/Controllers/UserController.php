@@ -411,9 +411,9 @@ class UserController extends Controller
             'nama' => 'required|string|max:100',
 
             /**
-             * password must have minimum 5 character
+             * password must have minimum 5 character and can be null(if user hadn't filled in edit)
              */
-            'password' => 'required|min:5',
+            'password' => 'nullable|min:5',
 
             /**
              * level must fill with number
