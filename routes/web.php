@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KategoriResourceController;
 use App\Http\Controllers\LevelResourceController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KategoriController;
@@ -112,3 +113,9 @@ Route::group(['prefix' => 'user'], function () {
  */
 Route::resource('level', LevelResourceController::class);
 Route::post('level/list', [LevelResourceController::class, 'list']);
+
+/**
+ * Route for Resource in Level table: create, store, show, edit, update, and destroy, also with list that return JsonResponse
+ */
+Route::resource('kategori', KategoriResourceController::class);
+Route::post('kategori/list', [KategoriResourceController::class, 'list']);
