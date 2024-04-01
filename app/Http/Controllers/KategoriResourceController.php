@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use App\Http\Requests\KategoriResourceRequest;
 use App\Models\KategoriModel;
 use Illuminate\Http\JsonResponse;
