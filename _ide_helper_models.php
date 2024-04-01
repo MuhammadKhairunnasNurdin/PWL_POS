@@ -13,7 +13,37 @@
 
 namespace App\Models{
 /**
+ * 
  *
+ * @property int $barang_id
+ * @property int $kategori_id
+ * @property string $barang_kode
+ * @property string $barang_nama
+ * @property int $harga_beli
+ * @property int $harga_jual
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\KategoriModel $kategori
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereBarangId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereBarangKode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereBarangNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereHargaBeli($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereHargaJual($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereKategoriId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperBarangModel {}
+}
+
+namespace App\Models{
+/**
+ * 
  *
  * @property int $kategori_id
  * @property string $kategori_kode
@@ -36,13 +66,15 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @property int $level_id
  * @property string $level_kode
  * @property string $level_nama
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\m_user> $m_user
+ * @property-read int|null $m_user_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserModel> $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|LevelModel newModelQuery()
@@ -61,7 +93,41 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * 
  *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property mixed $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperUser {}
+}
+
+namespace App\Models{
+/**
+ * 
  *
  * @property int $user_id
  * @property int $level_id
@@ -89,15 +155,16 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @property int $user_id
- * @property int $level_id
- * @property string $username
- * @property string $nama
- * @property string $password
+ * @property int|null $level_id
+ * @property string|null $username
+ * @property string|null $nama
+ * @property string|null $password
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @property-read \App\Models\LevelModel|null $level
  * @method static \Illuminate\Database\Eloquent\Builder|m_user newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|m_user newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|m_user query()
