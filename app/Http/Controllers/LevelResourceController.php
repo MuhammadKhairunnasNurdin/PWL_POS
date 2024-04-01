@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use App\Http\Requests\LevelResourceRequest;
 use Illuminate\Http\RedirectResponse;
 use Yajra\DataTables\Facades\DataTables;
@@ -27,16 +28,11 @@ class LevelResourceController extends Controller
         ];
 
         /**
-         * retrieve all level_nama and level_id for filtering what level_kode that level_nama had feature
-         */
-        $levels = LevelModel::select(['level_id','level_nama'])->get();
-
-        /**
          * Set active menu
          */
         $activeMenu = 'level';
 
-        return view('level.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'levels' => $levels,'activeMenu' => $activeMenu]);
+        return view('level.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
     /**
@@ -46,13 +42,6 @@ class LevelResourceController extends Controller
     public function list(Request $request): JsonResponse
     {
         $levels = LevelModel::select(['level_id', 'level_kode', 'level_nama']);
-
-        /**
-         * Filter User data that we retrieve above base level_id retrieved in user.index view
-         */
-        if ($request->level_id) {
-            $levels->where('level_id', $request->level_id);
-        }
 
         return DataTables::of($levels)
             ->addIndexColumn()
@@ -196,7 +185,7 @@ class LevelResourceController extends Controller
         $check = LevelModel::find($id);
 
         /**
-         * check whatever user data with id is available or not
+         * check whatever level data with id is available or not
          */
         if (!$check) {
             return redirect('/level')->with('error', 'Data Level tidak ditemukan');
