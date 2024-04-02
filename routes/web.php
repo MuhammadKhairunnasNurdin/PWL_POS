@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TransaksiPenjualanResourceController;
 use App\Http\Controllers\StokResourceController;
 use App\Http\Controllers\BarangResourceController;
 use App\Http\Controllers\KategoriResourceController;
@@ -133,3 +134,9 @@ Route::post('barang/list', [BarangResourceController::class, 'list']);
  */
 Route::resource('stok', StokResourceController::class);
 Route::post('stok/list', [StokResourceController::class, 'list']);
+
+/**
+ * Route for Resource Transaksi Penjualan (t_penjualan and t_penjualan_detail table): create, store, show, edit, update, and destroy, also with list that return JsonResponse
+ */
+Route::resource('penjualan', TransaksiPenjualanResourceController::class);
+Route::post('penjualan/list', [TransaksiPenjualanResourceController::class, 'list']);

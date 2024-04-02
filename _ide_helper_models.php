@@ -24,6 +24,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\KategoriModel $kategori
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PenjualanDetailModel> $penjualanDetail
+ * @property-read int|null $penjualan_detail_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\StokModel> $stok
  * @property-read int|null $stok_count
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel newModelQuery()
@@ -93,6 +95,64 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperLevelModel {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $detail_id
+ * @property int $penjualan_id
+ * @property int $barang_id
+ * @property int $harga
+ * @property int $jumlah
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\BarangModel $barang
+ * @property-read \App\Models\PenjualanModel $penjualan
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel whereBarangId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel whereDetailId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel whereHarga($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel whereJumlah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel wherePenjualanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanDetailModel whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperPenjualanDetailModel {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $penjualan_id
+ * @property int $user_id
+ * @property string $pembeli
+ * @property string $penjualan_kode
+ * @property string $penjualan_tanggal
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\PenjualanDetailModel|null $penjualanDetail
+ * @property-read \App\Models\UserModel $user
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel wherePembeli($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel wherePenjualanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel wherePenjualanKode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel wherePenjualanTanggal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PenjualanModel whereUserId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperPenjualanModel {}
 }
 
 namespace App\Models{
@@ -170,6 +230,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\LevelModel $level
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PenjualanModel> $penjualan
+ * @property-read int|null $penjualan_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\StokModel> $stok
  * @property-read int|null $stok_count
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel newModelQuery()
