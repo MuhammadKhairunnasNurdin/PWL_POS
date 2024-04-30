@@ -256,9 +256,9 @@ namespace App\Models{
  *
  * @property int $user_id
  * @property int|null $level_id
- * @property string|null $username
- * @property string|null $nama
- * @property string|null $password
+ * @property string $username
+ * @property string $nama
+ * @property string $password
  * @property string|null $created_at
  * @property string|null $updated_at
  * @property-read \App\Models\LevelModel|null $level
