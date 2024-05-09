@@ -20,7 +20,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+/**
+ * for register without user fill image in form
+ */
 Route::post('/register', RegisterController::class)->name('register');
+/**
+ * for register with user fill image in form
+ */
+Route::post('/register1', RegisterController::class)->name('register1');
+
 Route::post('/login', LoginController::class)->name('login');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
