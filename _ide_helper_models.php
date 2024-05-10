@@ -23,6 +23,7 @@ namespace App\Models{
  * @property int $harga_jual
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string|null $image
  * @property-read \App\Models\KategoriModel $kategori
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PenjualanDetailModel> $penjualanDetail
  * @property-read int|null $penjualan_detail_count
@@ -37,6 +38,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereHargaBeli($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereHargaJual($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereKategoriId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BarangModel whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -229,6 +231,7 @@ namespace App\Models{
  * @property string $password
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string|null $image
  * @property-read \App\Models\LevelModel $level
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PenjualanModel> $penjualan
  * @property-read int|null $penjualan_count
@@ -238,6 +241,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel query()
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereLevelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereNama($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserModel wherePassword($value)

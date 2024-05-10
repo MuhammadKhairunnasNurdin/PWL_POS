@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TransaksiPenjualan;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\LevelController;
@@ -54,3 +55,8 @@ Route::resource('kategori', KategoriController::class)->except(['create', 'edit'
  * Route for Api Resource for BarangModel or m_barang Table
  */
 Route::resource('barang', BarangController::class)->except(['create', 'edit']);
+
+/**
+ * Route for Api Resource for PenjualanModel and PenjualanDetailModel or Transaksi Barang feature
+ */
+Route::resource('transaksi', TransaksiPenjualan::class)->except(['create', 'edit']);
